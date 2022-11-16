@@ -15,6 +15,7 @@ public class PieSocketOptions {
     private Boolean forceAuth;
     private String userId;
     private String version;
+    private String webSocketEndpoint;
 
     public PieSocketOptions(){
         this.version = "3";
@@ -22,6 +23,14 @@ public class PieSocketOptions {
         this.notifySelf = true;
         this.presence = false;
         this.forceAuth = false;
+    }
+
+    public String getWebSocketEndpoint() {
+        return webSocketEndpoint;
+    }
+
+    public void setWebSocketEndpoint(String webSocketEndpoint) {
+        this.webSocketEndpoint = webSocketEndpoint;
     }
 
     public String getVersion() {

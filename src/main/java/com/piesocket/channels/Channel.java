@@ -49,7 +49,24 @@ public class Channel extends WebSocketListener implements Callback {
         this.connect(roomId);
     }
 
+    public Channel(String webSocketURL, boolean enableLogs){
+        this.listeners = new HashMap<>();
+        this.id = "standalone";
+        this.logger = new Logger(enableLogs);
+        this.uuid = UUID.randomUUID().toString();
+        this.shouldReconnect = false;
+
+        this.options = new PieSocketOptions();
+        this.options.setWebSocketEndpoint(webSocketURL);
+
+        this.connect(this.id);
+    }
+
     public String buildEndpoint(){
+        if(this.options.getWebSocketEndpoint() != null){
+            return this.options.getWebSocketEndpoint();
+        }
+
         String endpoint = "wss://" + this.options.getClusterId() + ".piesocket.com/v" + this.options.getVersion() + "/" + this.id + "?api_key=" + this.options.getApiKey() + "&notify_self=" + this.options.getNotifySelf() + "&source=androidsdk&v=1&presence="+ this.options.getPresence();
 
         String jwt = this.getAuthToken();
@@ -64,7 +81,6 @@ public class Channel extends WebSocketListener implements Callback {
         //Add UUID
         endpoint = endpoint +"&uuid=" + this.uuid;
 
-        logger.log("Room endpoint: "+endpoint);
         return endpoint;
     }
 
@@ -104,13 +120,15 @@ public class Channel extends WebSocketListener implements Callback {
         logger.log("Connecting to: "+roomId);
 
         try{
+            String endpoint = this.buildEndpoint();
+            this.logger.log("WebSocket Endpoint: "+ endpoint);
             OkHttpClient client = new OkHttpClient.Builder()
                     .readTimeout(0,  TimeUnit.MILLISECONDS)
                     .build();
 
             Request request = new Request
                     .Builder()
-                    .url(this.buildEndpoint())
+                    .url(endpoint)
                     .build();
 
             this.ws = client.newWebSocket(request, this);
@@ -163,6 +181,10 @@ public class Channel extends WebSocketListener implements Callback {
 
     public void publish(PieSocketEvent event){
         this.ws.send(event.toString());
+    }
+
+    public void send(String text){
+        this.ws.send(text);
     }
 
     private  void fireEvent(PieSocketEvent event){

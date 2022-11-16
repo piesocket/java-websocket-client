@@ -15,11 +15,11 @@ public class PieSocket {
     public PieSocket(PieSocketOptions pieSocketOptions){
         this.rooms = new HashMap<String, Channel>();
         this.options = pieSocketOptions;
-        this.logger = new Logger(true);
+        this.logger = new Logger(this.options.getEnableLogs());
+
 
         validateOptions();
     }
-
 
     private void validateOptions(){
         if(this.options.getClusterId() == null){
