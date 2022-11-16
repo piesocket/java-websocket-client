@@ -1,5 +1,7 @@
 package com.piesocket.channels;
 
+import android.util.Log;
+
 import com.piesocket.channels.misc.PieSocketEvent;
 import com.piesocket.channels.misc.PieSocketEventListener;
 import com.piesocket.channels.misc.Logger;
@@ -10,6 +12,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
@@ -29,14 +32,14 @@ public class Channel extends WebSocketListener implements Callback {
     public String uuid;
 
     private static final int NORMAL_CLOSURE_STATUS = 1000;
-    private HashMap<String, PieSocketEventListener> listeners;
+    private HashMap<String, ArrayList<PieSocketEventListener>> listeners;
     private Logger logger;
     private PieSocketOptions options;
     private JSONArray members;
     private Boolean shouldReconnect;
 
     public Channel(String roomId, PieSocketOptions pieSocketOptions, Logger logger){
-        this.listeners = new HashMap<String, PieSocketEventListener>();
+        this.listeners = new HashMap<>();
         this.id = roomId;
         this.logger = logger;
         this.options = pieSocketOptions;
@@ -134,9 +137,29 @@ public class Channel extends WebSocketListener implements Callback {
 
 
     public void listen(String eventName, PieSocketEventListener callback){
-        listeners.put(eventName, callback);
+        ArrayList<PieSocketEventListener> callbacks;
+
+        if(this.listeners.containsKey(eventName)){
+            callbacks = listeners.get(eventName);
+        }else{
+            callbacks = new ArrayList<>();
+        }
+
+        callbacks.add(callback);
+        listeners.put(eventName, callbacks);
     }
 
+    public void removeListener(String eventName, PieSocketEventListener callback){
+        if(this.listeners.containsKey(eventName)){
+            this.listeners.get(eventName).remove(callback);
+        }
+    }
+
+    public void removeAllListeners(String eventName) {
+        if (this.listeners.containsKey(eventName)) {
+            this.listeners.remove(eventName);
+        }
+    }
 
     public void publish(PieSocketEvent event){
         this.ws.send(event.toString());
@@ -146,11 +169,18 @@ public class Channel extends WebSocketListener implements Callback {
         logger.log("Fired Event: " +event.toString());
 
         if (this.listeners.containsKey(event.getEvent())) {
-            this.listeners.get(event.getEvent()).handleEvent(event);
+            doFireEvents(event.getEvent(), event);
         }
 
         if (this.listeners.containsKey("*")) {
-            this.listeners.get("*").handleEvent(event);
+            doFireEvents("*", event);
+        }
+    }
+
+    public void doFireEvents(String eventName, PieSocketEvent event){
+        ArrayList<PieSocketEventListener> callbacks = this.listeners.get(eventName);
+        for(int i=0; i < callbacks.size(); i++){
+            callbacks.get(i).handleEvent(event);
         }
     }
 
@@ -171,7 +201,9 @@ public class Channel extends WebSocketListener implements Callback {
         if (this.listeners.containsKey("system:message")) {
             payload.setEvent("system:message");
             payload.setData(text);
-            this.listeners.get("system:message").handleEvent(payload);
+
+
+            doFireEvents("system:message", payload);
         }
 
         try {

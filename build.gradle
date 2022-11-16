@@ -35,7 +35,7 @@ android {
 }
 
 group = "com.piesocket.channels"
-version = "1.0.0-beta3"
+version = "1.0.0-rc3"
 
 mavenPublishing {
     pom {
@@ -54,13 +54,13 @@ mavenPublishing {
             developer {
                 id = "piesocket"
                 name = "PieSocket"
-                url = "https://github.com/piesocket"
+                url = "https://piesocket.com/channels"
             }
         }
         scm {
-            url = "https://github.com/piesocket/piesocket-android"
-            connection = "scm:git:git@github.com:piesocket/piesocket-android.git"
-            developerConnection = "scm:git:ssh://git@github.com/piesocket/piesocket-android.git"
+            url = "https://github.com/piesocket/websocket-android-client"
+            connection = "scm:git:git@github.com:piesocket/websocket-android-client.git"
+            developerConnection = "scm:git:ssh://git@github.com/piesocket/websocket-android-client.git"
         }
     }
     publishToMavenCentral(SonatypeHost.S01)
