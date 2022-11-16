@@ -7,7 +7,6 @@ plugins {
 
 android {
     compileSdk 32
-    namespace = "com.piesocket.channels"
 
     defaultConfig {
         minSdk 30
@@ -35,9 +34,8 @@ android {
     }
 }
 
-group = "com.piesocket.java-sdk"
-version = "1.0.0-beta1"
-
+group = "com.piesocket.channels"
+version = "1.0.0-beta3"
 
 mavenPublishing {
     pom {
@@ -69,6 +67,7 @@ mavenPublishing {
     signAllPublications()
 }
 
+
 dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.3.0'
@@ -77,5 +76,5 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
-    implementation 'com.squareup.okhttp3:okhttp:3.6.0'
+    api 'com.squareup.okhttp3:okhttp:3.6.0'
 }

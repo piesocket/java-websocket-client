@@ -1,4 +1,4 @@
-package com.piesocket.sdk.misc;
+package com.piesocket.channels.misc;
 
 public class PieSocketException extends  RuntimeException{
 

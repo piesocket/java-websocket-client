@@ -1,4 +1,4 @@
-package com.piesocket.sdk.misc;
+package com.piesocket.channels.misc;
 
 import android.util.Log;
 
@@ -19,6 +19,14 @@ public class Logger {
         if(this.enabled){
             Log.d( this.LOG_TAG , text);
         }
+    }
+
+    public void disableLogs(){
+        this.enabled = false;
+    }
+
+    public void enableLogs(){
+        this.enabled = true;
     }
 
 }

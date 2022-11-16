@@ -1,8 +1,4 @@
-package com.piesocket.sdk.misc;
-
-import org.json.JSONObject;
-
-import java.util.HashMap;
+package com.piesocket.channels.misc;
 
 public abstract class PieSocketEventListener {
     public PieSocketEventListener(){}

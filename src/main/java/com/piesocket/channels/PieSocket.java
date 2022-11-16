@@ -1,24 +1,23 @@
-package com.piesocket.sdk;
+package com.piesocket.channels;
 
-import com.piesocket.sdk.misc.Logger;
-import com.piesocket.sdk.misc.PieSocketException;
-import com.piesocket.sdk.misc.PieSocketOptions;
+import com.piesocket.channels.misc.Logger;
+import com.piesocket.channels.misc.PieSocketException;
+import com.piesocket.channels.misc.PieSocketOptions;
 
 import java.util.HashMap;
 
 public class PieSocket {
 
-    public HashMap<String, Room> rooms;
+    public HashMap<String, Channel> rooms;
     public PieSocketOptions options;
     public Logger logger;
 
     public PieSocket(PieSocketOptions pieSocketOptions){
-        this.rooms = new HashMap<String, Room>();
+        this.rooms = new HashMap<String, Channel>();
         this.options = pieSocketOptions;
         this.logger = new Logger(true);
 
         validateOptions();
-
     }
 
 
@@ -33,14 +32,14 @@ public class PieSocket {
     }
 
 
-    public Room join(String roomId){
+    public Channel join(String roomId){
 
         if(this.rooms.containsKey(roomId)){
             logger.log("Returning existing room instance: "+roomId);
             return this.rooms.get(roomId);
         }
 
-        Room room = new Room(roomId, this.options, this.logger);
+        Channel room = new Channel(roomId, this.options, this.logger);
         this.rooms.put(roomId, room);
 
         return  room;
@@ -56,7 +55,7 @@ public class PieSocket {
         }
     }
 
-    public HashMap<String, Room> getAllRooms(){
+    public HashMap<String, Channel> getAllRooms(){
         return this.rooms;
     }
 

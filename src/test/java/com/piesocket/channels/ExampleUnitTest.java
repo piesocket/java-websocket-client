@@ -1,4 +1,4 @@
-package com.piesocket.sdk;
+package com.piesocket.channels;
 
 import org.junit.Test;
 

@@ -1,12 +1,10 @@
-package com.piesocket.sdk;
+package com.piesocket.channels;
 
-import android.util.Log;
-
-import com.piesocket.sdk.misc.PieSocketEvent;
-import com.piesocket.sdk.misc.PieSocketEventListener;
-import com.piesocket.sdk.misc.Logger;
-import com.piesocket.sdk.misc.PieSocketException;
-import com.piesocket.sdk.misc.PieSocketOptions;
+import com.piesocket.channels.misc.PieSocketEvent;
+import com.piesocket.channels.misc.PieSocketEventListener;
+import com.piesocket.channels.misc.Logger;
+import com.piesocket.channels.misc.PieSocketException;
+import com.piesocket.channels.misc.PieSocketOptions;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -14,20 +12,17 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.UUID;
-import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.WebSocket;
 import okhttp3.WebSocketListener;
 
-public class Room extends WebSocketListener implements Callback {
+public class Channel extends WebSocketListener implements Callback {
 
     public String id;
     public WebSocket ws;
@@ -40,7 +35,7 @@ public class Room extends WebSocketListener implements Callback {
     private JSONArray members;
     private Boolean shouldReconnect;
 
-    public Room(String roomId, PieSocketOptions pieSocketOptions, Logger logger){
+    public Channel(String roomId, PieSocketOptions pieSocketOptions, Logger logger){
         this.listeners = new HashMap<String, PieSocketEventListener>();
         this.id = roomId;
         this.logger = logger;
@@ -136,10 +131,6 @@ public class Room extends WebSocketListener implements Callback {
         }
     }
 
-
-    public void shareVideo(){
-
-    }
 
 
     public void listen(String eventName, PieSocketEventListener callback){

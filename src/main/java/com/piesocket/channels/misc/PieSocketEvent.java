@@ -1,4 +1,4 @@
-package com.piesocket.sdk.misc;
+package com.piesocket.channels.misc;
 
 import org.json.JSONObject;
 
@@ -7,6 +7,12 @@ public class PieSocketEvent {
     private String event;
     private String data;
     private String meta;
+
+    public PieSocketEvent(){}
+
+    public PieSocketEvent(String eventName){
+        this.setEvent(eventName);
+    }
 
     public String getEvent() {
         return event;
@@ -30,6 +36,7 @@ public class PieSocketEvent {
     public String getMeta() {
         return meta;
     }
+
 
     public PieSocketEvent setMeta(String meta) {
         this.meta = meta;
