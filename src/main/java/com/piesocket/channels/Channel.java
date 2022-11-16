@@ -165,7 +165,7 @@ public class Channel extends WebSocketListener implements Callback {
         this.ws.send(event.toString());
     }
 
-    public  void fireEvent(PieSocketEvent event){
+    private  void fireEvent(PieSocketEvent event){
         logger.log("Fired Event: " +event.toString());
 
         if (this.listeners.containsKey(event.getEvent())) {
@@ -177,7 +177,7 @@ public class Channel extends WebSocketListener implements Callback {
         }
     }
 
-    public void doFireEvents(String eventName, PieSocketEvent event){
+    private void doFireEvents(String eventName, PieSocketEvent event){
         ArrayList<PieSocketEventListener> callbacks = this.listeners.get(eventName);
         for(int i=0; i < callbacks.size(); i++){
             callbacks.get(i).handleEvent(event);

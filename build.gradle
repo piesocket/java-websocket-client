@@ -34,13 +34,13 @@ android {
     }
 }
 
-group = "com.piesocket.channels"
-version = "1.0.0-rc3"
+group = "com.piesocket"
+version = "1.0.2"
 
 mavenPublishing {
     pom {
         name = "PieSocket Channels"
-        description = "Realtime PubSub SDK for Java powered applications."
+        description = "WebSocket Client SDK for Java and Android applications. See all features: https://piesocket/channels"
         inceptionYear = "2019"
         url = "https://piesocket.com/channels"
         licenses {
@@ -70,8 +70,6 @@ mavenPublishing {
 
 dependencies {
 
-    implementation 'androidx.appcompat:appcompat:1.3.0'
-    implementation 'com.google.android.material:material:1.4.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
