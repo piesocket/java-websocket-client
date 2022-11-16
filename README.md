@@ -35,7 +35,7 @@ Setup manifest permissions as instructed [here](https://www.piesocket.com/docs/3
 ## Usage
 
 ### Use PieSocket's managed WebSocket server
-Get your API key and Cluster ID here: [Create PieSocket account](/app/v4/register)
+Get your API key and Cluster ID here: [Create PieSocket account](https://www.piesocket.com/app/v4/register)
 
 ```
 PieSocketOptions options = new PieSocketOptions();
