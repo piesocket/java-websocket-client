@@ -22,11 +22,11 @@ implementation 'com.piesocket:channels-sdk:1.0.4'
 
 ### Maven
 ```
-&lt;dependency&gt;
-    &lt;groupId&gt;com.piesocket&lt;/groupId&gt;
-    &lt;artifactId&gt;channels-sdk&lt;/artifactId&gt;
-    &lt;version&gt;1.0.4&lt;/version&gt;
-&lt;/dependency&gt;
+<dependency>
+    <groupId>com.piesocket</groupId>
+    <artifactId>channels-sdk</artifactId>
+    <version>1.0.4</version>
+</dependency>
 ```
 
 ## Permissions
