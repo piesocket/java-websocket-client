@@ -50,7 +50,6 @@ channel.listen("system:connected", new PieSocketEventListener() {
   }
 });
 ```
-`system:connected` is the event fired when WebSocket connection is ready, get a full list system messages here: [PieSocket System Messages](https://www.piesocket.com/docs/3.0/events#system-events)
 
 ### Recommended: Use PieSocket's managed WebSocket server
 Use following code to create a Channel with PieSocket's managed WebSocket servers.
@@ -78,6 +77,9 @@ Channel channel = piesocket.join("chat-room-1");
   - Upto 60% cost savings
 
 We highly recommend using PieSocket Channels over self hosted WebSocket servers for production applications.
+
+## Events
+`system:connected` is the event fired when WebSocket connection is ready, get a full list system messages here: [PieSocket System Messages](https://www.piesocket.com/docs/3.0/events#system-events)
 
 ## Documentation
 For usage examples and more information, refer to: [Official SDK docs](https://www.piesocket.com/docs/3.0/android-websockets)
