@@ -27,11 +27,11 @@ import okhttp3.WebSocketListener;
 
 public class Channel extends WebSocketListener implements Callback {
 
+    private static final int NORMAL_CLOSURE_STATUS = 1000;
     public String id;
     public WebSocket ws;
     public String uuid;
 
-    private static final int NORMAL_CLOSURE_STATUS = 1000;
     private HashMap<String, ArrayList<PieSocketEventListener>> listeners;
     private Logger logger;
     private PieSocketOptions options;
@@ -116,6 +116,7 @@ public class Channel extends WebSocketListener implements Callback {
         okHttpClient.newCall(request).enqueue(this);
     }
 
+    //TODO: No param required
     public void connect(String roomId){
         logger.log("Connecting to: "+roomId);
 
@@ -188,7 +189,7 @@ public class Channel extends WebSocketListener implements Callback {
     }
 
     private  void fireEvent(PieSocketEvent event){
-        logger.log("Fired Event: " +event.toString());
+        logger.log("Firing Event: " +event.toString());
 
         if (this.listeners.containsKey(event.getEvent())) {
             doFireEvents(event.getEvent(), event);
@@ -199,8 +200,8 @@ public class Channel extends WebSocketListener implements Callback {
         }
     }
 
-    private void doFireEvents(String eventName, PieSocketEvent event){
-        ArrayList<PieSocketEventListener> callbacks = this.listeners.get(eventName);
+    private void doFireEvents(String listenerKey, PieSocketEvent event){
+        ArrayList<PieSocketEventListener> callbacks = this.listeners.get(listenerKey);
         for(int i=0; i < callbacks.size(); i++){
             callbacks.get(i).handleEvent(event);
         }

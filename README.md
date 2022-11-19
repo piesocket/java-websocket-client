@@ -34,8 +34,17 @@ Setup manifest permissions as instructed [here](https://www.piesocket.com/docs/3
 
 ## Usage
 
-### Use PieSocket's managed WebSocket server
-Get your API key and Cluster ID here: [Create PieSocket account](https://www.piesocket.com/app/v4/register)
+### Stand-alone Usage
+Create a Channel instance as shown below.
+
+```
+Channel channel = new Channel("wss://example.com", true);
+```
+
+### Recommended: Use PieSocket's managed WebSocket server
+Use following code to create a Channel with PieSocket's managed WebSocket servers.
+
+Get your API key and Cluster ID here: [Get API Key](https://www.piesocket.com/app/v4/register)
 
 ```
 PieSocketOptions options = new PieSocketOptions();
@@ -46,14 +55,7 @@ PieSocket piesocket = new PieSocket(options);
 Channel channel = piesocket.join("chat-room-1");
 ```
 
-### Stand-alone Usage
-To use with third-party WebSocket servers, skip the initialization part above and create a Channel instance as shown below.
-
-```
-Channel channel = new Channel("wss://example.com", true);
-```
-
-[PieSocket Channels](https://piesocket.com/channels) is a managed WebSockets service with following features:
+[PieSocket Channels](https://piesocket.com/channels) is a scalable WebSocket API service with following features:
   - Authentication
   - Private Channels
   - Presence Channels
