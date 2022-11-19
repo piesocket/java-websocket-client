@@ -50,6 +50,7 @@ channel.listen("system:connected", new PieSocketEventListener() {
   }
 });
 ```
+`system:connected` is the event fired when WebSocket connection is ready, get a full list system messages here: [PieSocket System Messages](https://www.piesocket.com/docs/3.0/events#system-events)
 
 ### Recommended: Use PieSocket's managed WebSocket server
 Use following code to create a Channel with PieSocket's managed WebSocket servers.
