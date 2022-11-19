@@ -39,6 +39,15 @@ Create a Channel instance as shown below.
 
 ```
 Channel channel = new Channel("wss://example.com", true);
+channel.listen("system:connected", new PieSocketEventListener() {
+  @Override
+  public void handleEvent(PieSocketEvent event) {
+
+    //WebSocket Connected
+    channel.send("Hello");
+
+  }
+});
 ```
 
 ### Recommended: Use PieSocket's managed WebSocket server
