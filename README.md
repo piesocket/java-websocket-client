@@ -11,12 +11,12 @@ and implements auto-reconnection among other best WebSocket practices.
 Let's start by adding PieSocket Android SDK as a dependency to your application. 
 
 ### Gradle (Kotlin)
-```
+```java
 implementation("com.piesocket:channels-sdk:1.0.4")
 ```
 
 ### Gradle (Java)
-```
+```java
 implementation 'com.piesocket:channels-sdk:1.0.4'
 ```
 
@@ -37,7 +37,7 @@ Setup manifest permissions as instructed [here](https://www.piesocket.com/docs/3
 ### Stand-alone Usage
 Create a Channel instance as shown below.
 
-```
+```java
 Channel channel = new Channel("wss://example.com", true);
 
 channel.listen("system:connected", new PieSocketEventListener() {
@@ -56,7 +56,7 @@ Use following code to create a Channel with PieSocket's managed WebSocket server
 
 Get your API key and Cluster ID here: [Get API Key](https://www.piesocket.com/app/v4/register)
 
-```
+```java
 PieSocketOptions options = new PieSocketOptions();
 options.setClusterId("demo");
 options.setApiKey("VCXCEuvhGcBDP7XhiJJUDvR1e1D3eiVjgZ9VRiaV");
