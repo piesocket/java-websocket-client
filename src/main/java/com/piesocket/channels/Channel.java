@@ -154,7 +154,6 @@ public class Channel extends WebSocketListener implements Callback {
     }
 
 
-
     public void listen(String eventName, PieSocketEventListener callback){
         ArrayList<PieSocketEventListener> callbacks;
 
