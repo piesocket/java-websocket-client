@@ -188,7 +188,7 @@ public class Channel extends WebSocketListener implements Callback {
     }
 
     private  void fireEvent(PieSocketEvent event){
-        logger.log("Firing Event: " +event.toString());
+        logger.log("Event: "+event.getEvent()+",  " +event.toString());
 
         if (this.listeners.containsKey(event.getEvent())) {
             doFireEvents(event.getEvent(), event);
@@ -277,10 +277,13 @@ public class Channel extends WebSocketListener implements Callback {
 
     @Override
     public void onFailure(WebSocket webSocket, Throwable t, Response response) {
+        logger.log("Connection closed");
         PieSocketEvent event = new PieSocketEvent();
         event.setEvent("system:error");
         event.setData(t.getMessage());
         this.fireEvent(event);
+
+        this.reconnect();
     }
 
 
